@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - PGDATA=/var/lib/postgresql/data/url_shortener/
+
+  web:
+    build: .
+    volumes:
+      - type: bind
+        source: .
+        target: /opt/app
+    ports:
+      - "4000:4000"
+    environment:
+      # Modify your config files (dev.exs and test.exs) so that the password and hostname can be overridden
+      # when environment variables are set:
+      # password: System.get_env("DB_PASS", "postgres"),
+      # hostname: System.get_env("DB_HOST", "localhost"),
+      - DB_PASS=postgres
+      - DB_HOST=postgres
+    depends_on:
+      - postgres
+    command:
+      - ./run.sh
