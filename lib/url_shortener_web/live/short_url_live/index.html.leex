@@ -1,0 +1,37 @@
+<h1>Listing Short urls</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, UrlShortenerWeb.ShortUrlLive.FormComponent,
+    id: @short_url.id || :new,
+    title: @page_title,
+    action: @live_action,
+    short_url: @short_url,
+    return_to: Routes.short_url_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Slug</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="short_urls">
+    <%= for short_url <- @short_urls do %>
+      <tr id="short_url-<%= short_url.id %>">
+        <td><%= short_url.url %></td>
+        <td><%= short_url.slug %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.short_url_show_path(@socket, :show, short_url) %></span>
+          <span><%= live_patch "Edit", to: Routes.short_url_index_path(@socket, :edit, short_url) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: short_url.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Short url", to: Routes.short_url_index_path(@socket, :new) %></span>

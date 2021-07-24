@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "short_url-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+  <%= label f, :url %>
+  <%= text_input f, :url %>
+  <%= error_tag f, :url %>
+
+  <%= label f, :slug %>
+  <%= text_input f, :slug %>
+  <%= error_tag f, :slug %>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>
