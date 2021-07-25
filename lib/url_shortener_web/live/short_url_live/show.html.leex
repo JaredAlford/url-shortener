@@ -1,5 +1,3 @@
-<h1>Show Short url</h1>
-
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, UrlShortenerWeb.ShortUrlLive.FormComponent,
     id: @short_url.id,
@@ -12,13 +10,13 @@
 <ul>
 
   <li>
-    <strong>Url:</strong>
-    <%= @short_url.url %>
+    <strong>Original URL:</strong>
+    <%= link @short_url.url, to: @short_url.url %>
   </li>
 
   <li>
-    <strong>Slug:</strong>
-    <%= @short_url.slug %>
+    <strong>Shortened URL:</strong>
+    <%= link @short_link, to: @short_link %>
   </li>
 
 </ul>
