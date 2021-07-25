@@ -22,4 +22,4 @@
 </ul>
 
 <span><%= live_patch "Edit", to: Routes.short_url_show_path(@socket, :edit, @short_url), class: "button" %></span>
-<span><%= live_redirect "Back", to: Routes.short_url_index_path(@socket, :index) %></span>
+<span><%= live_redirect "Back", to: Routes.short_url_index_path(@socket, :new) %></span>

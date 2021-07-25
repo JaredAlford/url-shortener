@@ -42,11 +42,10 @@ defmodule UrlShortenerWeb.ShortUrlLive.FormComponent do
 
   defp save_short_url(socket, :new, short_url_params) do
     case Data.create_short_url(short_url_params) do
-      {:ok, _short_url} ->
+      {:ok, short_url} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Short url created successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_redirect(to: Routes.short_url_show_path(socket, :show, short_url))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

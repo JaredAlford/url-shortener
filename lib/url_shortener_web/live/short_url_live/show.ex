@@ -14,9 +14,9 @@ defmodule UrlShortenerWeb.ShortUrlLive.Show do
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:short_url, Data.get_short_url!(id))
-     |> assign(:short_link, "#{UrlShortenerWeb.Endpoint.url()}/#{Data.get_short_url!(id).slug}")}
+     |> assign(:short_link, UrlShortener.Data.ShortUrl.get_shortened_url(Data.get_short_url!(id)))}
   end
 
-  defp page_title(:show), do: "Show Short url"
-  defp page_title(:edit), do: "Edit Short url"
+  defp page_title(:show), do: "Show Short URL"
+  defp page_title(:edit), do: "Edit Short URL"
 end

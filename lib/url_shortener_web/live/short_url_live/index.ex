@@ -16,19 +16,19 @@ defmodule UrlShortenerWeb.ShortUrlLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Short url")
+    |> assign(:page_title, "Edit Short URL")
     |> assign(:short_url, Data.get_short_url!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Short url")
+    |> assign(:page_title, "New Short URL")
     |> assign(:short_url, %ShortUrl{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Short urls")
+    |> assign(:page_title, "Listing Short URLs")
     |> assign(:short_url, nil)
   end
 

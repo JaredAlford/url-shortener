@@ -1,4 +1,4 @@
-<h1>Listing Short urls</h1>
+<h1>Shortened URLs</h1>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, UrlShortenerWeb.ShortUrlLive.FormComponent,
@@ -9,29 +9,17 @@
     return_to: Routes.short_url_index_path(@socket, :index) %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Url</th>
-      <th>Slug</th>
+<span><%= live_patch "New Short URL", to: Routes.short_url_index_path(@socket, :new) %></span>
+<hr>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="short_urls">
-    <%= for short_url <- @short_urls do %>
-      <tr id="short_url-<%= short_url.id %>">
-        <td><%= short_url.url %></td>
-        <td><%= short_url.slug %></td>
+<%= for short_url <- @short_urls do %>
+  <b>Original:</b><br>
+  <%= link short_url.url, to: short_url.url %><br>
+  <b>Shortened:</b><br>
+  <%= link UrlShortener.Data.ShortUrl.get_shortened_url(short_url), to: UrlShortener.Data.ShortUrl.get_shortened_url(short_url) %><br>
+  <span><%= live_patch "Edit", to: Routes.short_url_index_path(@socket, :edit, short_url) %></span>
+  <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: short_url.id, data: [confirm: "Are you sure?"] %></span>
+  <hr>
+<% end %>
 
-        <td>
-          <span><%= live_redirect "Show", to: Routes.short_url_show_path(@socket, :show, short_url) %></span>
-          <span><%= live_patch "Edit", to: Routes.short_url_index_path(@socket, :edit, short_url) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: short_url.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<span><%= live_patch "New Short url", to: Routes.short_url_index_path(@socket, :new) %></span>
+<span><%= live_patch "New Short URL", to: Routes.short_url_index_path(@socket, :new) %></span>
