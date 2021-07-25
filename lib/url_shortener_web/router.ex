@@ -17,13 +17,12 @@ defmodule UrlShortenerWeb.Router do
   scope "/", UrlShortenerWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", ShortUrlLive.Index, :new
     live "/short_urls", ShortUrlLive.Index, :index
-    live "/short_urls/new", ShortUrlLive.Index, :new
     live "/short_urls/:id/edit", ShortUrlLive.Index, :edit
-
     live "/short_urls/:id", ShortUrlLive.Show, :show
     live "/short_urls/:id/show/edit", ShortUrlLive.Show, :edit
+    get "/:slug", RedirectController, :show
   end
 
   # Other scopes may use custom stacks.

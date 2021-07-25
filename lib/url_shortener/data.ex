@@ -101,4 +101,11 @@ defmodule UrlShortener.Data do
   def change_short_url(%ShortUrl{} = short_url, attrs \\ %{}) do
     ShortUrl.changeset(short_url, attrs)
   end
+
+  def find_url(slug) when is_binary(slug) do
+    case Repo.get_by(ShortUrl, slug: slug) do
+      nil -> nil
+      result -> result.url
+    end
+  end
 end
