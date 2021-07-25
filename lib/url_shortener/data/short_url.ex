@@ -18,7 +18,7 @@ defmodule UrlShortener.Data.ShortUrl do
     |> validate_url()
     |> unique_constraint(:url)
     |> unique_constraint(:slug)
-    |> put_change(:slug, get_slug_hash(attrs["url"]))
+    |> put_change(:slug, get_slug_hash(attrs["url"] || attrs[:url]))
   end
 
   def get_shortened_url(short_url = %UrlShortener.Data.ShortUrl{}) do
