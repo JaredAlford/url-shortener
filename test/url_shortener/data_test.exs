@@ -6,9 +6,9 @@ defmodule UrlShortener.DataTest do
   describe "short_urls" do
     alias UrlShortener.Data.ShortUrl
 
-    @valid_attrs %{slug: "some slug", url: "some url"}
-    @update_attrs %{slug: "some updated slug", url: "some updated url"}
-    @invalid_attrs %{slug: nil, url: nil}
+    @valid_attrs %{url: "https://www.google.com", slug: "12345678"}
+    @update_attrs %{url: "https://facebook.com", slug: "ABDCEFGH"}
+    @invalid_attrs %{url: nil, slug: nil}
 
     def short_url_fixture(attrs \\ %{}) do
       {:ok, short_url} =
@@ -31,8 +31,7 @@ defmodule UrlShortener.DataTest do
 
     test "create_short_url/1 with valid data creates a short_url" do
       assert {:ok, %ShortUrl{} = short_url} = Data.create_short_url(@valid_attrs)
-      assert short_url.slug == "some slug"
-      assert short_url.url == "some url"
+      assert short_url.url == "https://www.google.com"
     end
 
     test "create_short_url/1 with invalid data returns error changeset" do
@@ -42,8 +41,7 @@ defmodule UrlShortener.DataTest do
     test "update_short_url/2 with valid data updates the short_url" do
       short_url = short_url_fixture()
       assert {:ok, %ShortUrl{} = short_url} = Data.update_short_url(short_url, @update_attrs)
-      assert short_url.slug == "some updated slug"
-      assert short_url.url == "some updated url"
+      assert short_url.url == "https://facebook.com"
     end
 
     test "update_short_url/2 with invalid data returns error changeset" do
