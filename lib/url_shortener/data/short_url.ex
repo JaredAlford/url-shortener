@@ -21,7 +21,7 @@ defmodule UrlShortener.Data.ShortUrl do
     |> put_change(:slug, get_slug_hash(attrs["url"] || attrs[:url]))
   end
 
-  def get_shortened_url(short_url = %UrlShortener.Data.ShortUrl{}) do
+  def get_shortened_url(%UrlShortener.Data.ShortUrl{} = short_url) do
     "#{UrlShortenerWeb.Endpoint.url()}/#{short_url.slug}"
   end
 
