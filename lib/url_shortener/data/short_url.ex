@@ -14,6 +14,7 @@ defmodule UrlShortener.Data.ShortUrl do
     short_url
     |> cast(attrs, [:url])
     |> validate_required([:url])
+    |> validate_length(:url, max: 2000)
     |> validate_url(:url)
     |> unique_constraint(:url)
     |> unique_constraint(:slug)
