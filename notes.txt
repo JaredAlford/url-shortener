@@ -8,6 +8,6 @@ Prerequisite: install Docker
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-## To run tests:
+## To run tests (while web server is running):
 
-* `docker-compose run web mix test`
+* `docker-compose exec web mix test`
